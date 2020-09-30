@@ -1,0 +1,56 @@
+              <script>
+                //目標値
+                	var target_arr<?php echo $new_index;?> =[];
+                	var target_count<?php echo $new_index;?> =[];
+                	var target<?php echo $new_index;?> = new XMLHttpRequest();
+                	target<?php echo $new_index;?>=JSON.parse('<?php echo $target_json[$new_index];?><?php echo $new_index;?><?php;?>');
+                	for(i=0;i<target<?php echo $new_index;?>.length;i++){
+                		target_arr<?php echo $new_index;?>[i]=(target<?php echo $new_index;?>[i].percent);
+                	}
+                
+                	for(j=1;j<target<?php echo $new_index;?>.length;j++){
+                		target_count<?php echo $new_index;?>[j]=j;
+                	}
+                
+                	//目標達成値
+                	var percent_arr<?php echo $new_index;?> =[];
+                	var percent<?php echo $new_index;?> = new XMLHttpRequest();
+                	percent<?php echo $new_index;?>=JSON.parse('<?php echo $jikkouti_total_json[$new_index];?>');
+                	for(k=0;k<percent<?php echo $new_index;?>.length;k++){
+                		percent_arr<?php echo $new_index;?>[k]=(percent<?php echo $new_index;?>[k].pasento);
+                	}
+                
+                	var context = document.getElementById('line-chart1').getContext('2d');
+                	var line_chart = new Chart(context, {
+                type:'line', // グラフのタイプを指定
+                data:{
+                labels:target_count1, // グラフ下部のラベル
+                datasets:[
+                {label:'目標値',  // データのラベル
+                data:target_arr<?php echo $new_index;?>, // グラフ化するデータの数値
+                fill:false, // グラフの下部を塗りつぶさない
+                borderColor:'rgb(50,144,229)'}, // 線の色
+                
+                {label:'目標達成率',  // データのラベル
+                data:percent_arr<?php echo $new_index;?>, // グラフ化するデータの数値
+                fill:false, // グラフの下部を塗りつぶさない
+                borderColor:'rgb(255, 52, 84)'}, // 線の色
+                ]
+                },
+                options:{
+                scales:{
+                yAxes:[{
+                ticks:{
+                min:0, // グラフの最小値
+                
+                      }
+                      }]
+                       },
+                elements:{
+                line:{
+                tension: 0 // 線グラフのベジェ曲線を無効にする
+                     }
+                	 }
+                	}
+                });
+              </script>             
